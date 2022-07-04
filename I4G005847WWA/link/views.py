@@ -1,30 +1,32 @@
-from rest_framework import ListAPIView
-from rest_framework import CreateAPIView
-from rest_framework import DetailAPIView
-from rest_framework import UpdateAPIView
-from rest_framework import DeleteAPIView
+from django.shortcuts import render
+from rest_framework import generics
+from rest_framework import serializers
+from rest_framework.generics import ListAPIView
+from rest_framework.generics import CreateAPIView
+from rest_framework.generics import RetrieveAPIView
+from rest_framework.generics import UpdateAPIView
+from rest_framework.generics import DestroyAPIView
+from .serializers import LinkSerializer
 from .models import link
-from .serializer import linkSerializer
-# Create your views here.
 
 
 
 class PostListApi(ListAPIView):
-    queryset = link.object.filter(active = True)
-    serializer_class = linkSerializer
+    queryset = link.objects.filter(active = True)
+    serializer_class = LinkSerializer
 
 class PostCreateApi(CreateAPIView):
     queryset = link.objects.filter(active = True)
-    serializer_class = linkSerializer
+    serializer_class = LinkSerializer
 
-class PostDetaileApi(DetailAPIView):
+class PostDetaileApi(RetrieveAPIView):
     queryset = link.objects.filter(active = True)
-    serializer_class = linkSerializer 
+    serializer_class = LinkSerializer 
 
 class PostUpdateApi(UpdateAPIView):
     queryset = link.objects.filter(active = True)
-    serializer_class = linkSerializer       
+    serializer_class = LinkSerializer       
 
-class PostDeleteApi(DeleteAPIView):
+class PostDeleteApi(DestroyAPIView):
     queryset = link.objects.filter(active = True)
-    serializer_class = linkSerializer       
+    serializer_class = LinkSerializer      
